@@ -62,4 +62,11 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("running", true);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //武器伤害
+
+
+    }
 }

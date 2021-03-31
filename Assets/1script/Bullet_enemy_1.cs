@@ -29,6 +29,11 @@ public class Bullet_enemy_1 : MonoBehaviour
             rb.velocity = new Vector2(0, 0);
             anim.SetBool("boom", true);
         }
+        else if(collision.gameObject.tag == "Player")
+        {
+            rb.velocity = new Vector2(0, 0);
+            anim.SetBool("boom", true);
+        }
     }
 
     //销毁子弹

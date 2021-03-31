@@ -29,14 +29,14 @@ public class Weapon : MonoBehaviour
         {
             //武器在敌人手上
             RotateWeaponForEnemy();
+
             Vector2 positionOfPlayer = player.position;
             float distanceFromEnemyToPlayer = (transform.position - player.position).sqrMagnitude;
             if (distanceFromEnemyToPlayer < fireDistance)
             {
                 //射线检测
-                Ray ray = new Ray(transform.position, player.position - transform.position);
-                
-                if(!Physics.Raycast(ray,distanceFromEnemyToPlayer,LayerMask.GetMask("Bullet_ignore")))
+                bool notFire = Physics2D.Raycast(transform.position, player.position - transform.position, Mathf.Sqrt(distanceFromEnemyToPlayer), 1 << LayerMask.NameToLayer("Wall"));
+                if(!notFire)
                 {
                     //开火
                     totalTime -= Time.deltaTime;
@@ -46,7 +46,6 @@ public class Weapon : MonoBehaviour
                         //todo:计时结束
                         totalTime = 1f;
                     }
-                    
                 }
             }
         }

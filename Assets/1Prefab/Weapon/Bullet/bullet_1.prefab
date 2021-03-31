@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8577575611190192185}
   m_Layer: 0
   m_Name: bullet_1
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,6 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   rb: {fileID: 5232203271236766137}
+  hurt: 2
 --- !u!95 &8577575611190192185
 Animator:
   serializedVersion: 3

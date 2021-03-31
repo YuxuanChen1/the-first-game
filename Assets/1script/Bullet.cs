@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     public float speed = 20f;
     public Rigidbody2D rb;
+    public int hurt;
     private Animator anim;
     void Start()
     {
