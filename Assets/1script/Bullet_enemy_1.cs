@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bullet_enemy_1 : MonoBehaviour
 {
     public float speed = 20f;
+    public int hurt = 2;
     public Rigidbody2D rb;
     private Animator anim;
     void Start()
@@ -25,11 +26,10 @@ public class Bullet_enemy_1 : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Destroy")
         {
-            Destroy(collision.gameObject);
             rb.velocity = new Vector2(0, 0);
             anim.SetBool("boom", true);
         }
-        else if(collision.gameObject.tag == "Player")
+        else if (collision.gameObject.tag == "Player")
         {
             rb.velocity = new Vector2(0, 0);
             anim.SetBool("boom", true);

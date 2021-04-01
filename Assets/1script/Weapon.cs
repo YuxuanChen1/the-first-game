@@ -6,48 +6,17 @@ public class Weapon : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject bulletPrefab;
-    public bool isOnPlayer;
-    public Transform player;
-    public float fireDistance;
 
     private Vector3 mousePosition;
-    private float totalTime = 1f;
 
 
     void Update()
     {
-        if (isOnPlayer)
+        RotateWeaponForPlayer();
+        //开枪
+        if (Input.GetMouseButtonDown(0))
         {
-            RotateWeaponForPlayer();
-            //开枪
-            if (isOnPlayer && Input.GetMouseButtonDown(0))
-            {
-                Shoot();
-            }
-        }
-        else
-        {
-            //武器在敌人手上
-            RotateWeaponForEnemy();
-
-            Vector2 positionOfPlayer = player.position;
-            float distanceFromEnemyToPlayer = (transform.position - player.position).sqrMagnitude;
-            if (distanceFromEnemyToPlayer < fireDistance)
-            {
-                //射线检测
-                bool notFire = Physics2D.Raycast(transform.position, player.position - transform.position, Mathf.Sqrt(distanceFromEnemyToPlayer), 1 << LayerMask.NameToLayer("Wall"));
-                if(!notFire)
-                {
-                    //开火
-                    totalTime -= Time.deltaTime;
-                    if (totalTime <= 0)
-                    {
-                        Shoot();
-                        //todo:计时结束
-                        totalTime = 1f;
-                    }
-                }
-            }
+            Shoot();
         }
     }
 
@@ -76,12 +45,15 @@ public class Weapon : MonoBehaviour
         direction.y = temp;
         //物体自身的Y轴和目标向量保持一直，这个过程XY轴都会变化数值 
         transform.up = direction;
-    }
+        if (direction.y >= 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else
+        {
+            transform.localScale = new Vector3(1, -1, 1);
+        }
 
-    void RotateWeaponForEnemy()
-    {
-        Vector2 direction = player.position - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 }
+

@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     public float speed = 20f;
     public Rigidbody2D rb;
-    public int hurt;
+    public int hurt = 2;
     private Animator anim;
     void Start()
     {
@@ -26,14 +26,11 @@ public class Bullet : MonoBehaviour
         }
         else if(collision.gameObject.tag == "Enemy")
         {
-            //敌人的代码
-
             rb.velocity = new Vector2(0, 0);
             anim.SetBool("boom", true);
         }
         else if(collision.gameObject.tag == "Destroy")
         {
-            Destroy(collision.gameObject);
             rb.velocity = new Vector2(0, 0);
             anim.SetBool("boom", true);
         }

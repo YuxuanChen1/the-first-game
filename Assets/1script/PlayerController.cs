@@ -6,9 +6,17 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator anim;
+    public GameObject weapon;
+    private GameObject weapon_skill;
+    private float skillTime;
+    private float skillCooltime;
 
     public float speed;
     private float faceRight = 1;
+    [SerializeField] private int blood = 5;
+    private int maxArmor = 5;
+    [SerializeField] private int armor = 5;//护甲
+    [SerializeField] private float cooldown = 5f;//护甲回复冷却
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -19,6 +27,8 @@ public class PlayerController : MonoBehaviour
     {
         Movement();
         AnimSwicth();
+        Recovery();
+        Skill();
     }
 
     void Movement()
@@ -63,10 +73,79 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //受到武器伤害
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //武器伤害
+        int hurt = 0;
+        if(collision.transform.tag == "Bullet_Enemy")
+        {
+            hurt = collision.transform.GetComponent<Bullet_enemy_1>().hurt;
+        }
+        else if(collision.transform.tag == "Bucktooth")
+        {
+            hurt = collision.transform.GetComponent<Bucktooth>().hurt;
+        }
 
+        if(hurt != 0)
+        {
+            cooldown = 5f;
+        }
 
+        if (armor >= hurt)
+        {
+            armor -= hurt;
+        }
+        else
+        {
+            blood -= hurt - armor;
+            armor = 0;
+        }
+        if (blood <= 0)
+        {
+            blood = 0;
+            Death();
+        }
+    }
+
+    //死亡
+    void Death()
+    {
+        //
+    }
+
+    //护甲回复
+    void Recovery()
+    {
+        cooldown -= Time.deltaTime;
+        if (cooldown <= 0f)
+        {
+            if (armor < maxArmor)
+            {
+                armor += 1;
+            }
+            cooldown = 1f;
+        }
+    }
+
+    void Skill()
+    {
+        skillTime -= Time.deltaTime;
+        skillCooltime -= Time.deltaTime;
+        if (Input.GetMouseButtonDown(1) && skillCooltime <= 0)
+        {
+            UseSkill();
+        }
+        if (skillTime <= 0 && weapon_skill)
+        {
+            Destroy(weapon_skill);
+            skillCooltime = 30f;
+        }
+    }
+
+    void UseSkill()
+    {
+        skillTime = 5f;
+        weapon_skill = Instantiate(weapon, transform.position, transform.rotation,transform);
+        weapon_skill.GetComponent<SpriteRenderer>().sortingOrder = 0;
     }
 }
