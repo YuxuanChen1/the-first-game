@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 2274217378094734656}
   - component: {fileID: 2274217378094734657}
   m_Layer: 9
-  m_Name: Enemy_3
+  m_Name: Enemy_1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -247,7 +247,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathPrefab: {fileID: 830940987505907261, guid: 156c4d9d1bb5f8e4a8739cc76bd95800,
     type: 3}
-  player: {fileID: 0}
+  energyPrefab: {fileID: 9074834124322579366, guid: 74b68c30a32b0b949a06aabe8dd9ff67,
+    type: 3}
+  goldPrefab: {fileID: 5187367614200184122, guid: 33e2b6cc18a593a4884a82e81302fa0b,
+    type: 3}
   speed: 5
   patrolDistance: 25
   blood: 5

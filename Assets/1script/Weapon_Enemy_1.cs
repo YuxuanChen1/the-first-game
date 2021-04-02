@@ -6,11 +6,15 @@ public class Weapon_Enemy_1 : MonoBehaviour
 {
     public Transform[] firePoint;
     public GameObject bulletPrefab;
-    public Transform player;
+    private Transform player;
     public float fireDistance;
 
     private float totalTime = 1f;
 
+    void Start()
+    {
+        player = GameObject.Find("Player").transform;
+    }
     void Update()
     {
         RotateWeaponForEnemy();

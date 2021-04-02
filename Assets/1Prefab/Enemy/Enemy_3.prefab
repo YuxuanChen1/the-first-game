@@ -197,9 +197,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathPrefab: {fileID: 4566420010335836586, guid: eee6eb2e1b97bc742bc670414c37256c,
     type: 3}
-  player: {fileID: 0}
+  energyPrefab: {fileID: 9074834124322579366, guid: 74b68c30a32b0b949a06aabe8dd9ff67,
+    type: 3}
+  goldPrefab: {fileID: 5187367614200184122, guid: 33e2b6cc18a593a4884a82e81302fa0b,
+    type: 3}
   speed: 5
-  patrolDistance: 25
+  patrolDistance: 50
   blood: 5
 --- !u!1001 &3641905876727384734
 PrefabInstance:
@@ -213,6 +216,11 @@ PrefabInstance:
       propertyPath: hand
       value: 
       objectReference: {fileID: 1055685399523618058}
+    - target: {fileID: 4335887125743424040, guid: 5e9667c46c82b474391c592cc4ed0543,
+        type: 3}
+      propertyPath: fireDistance
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4335887125743424045, guid: 5e9667c46c82b474391c592cc4ed0543,
         type: 3}
       propertyPath: m_Name

@@ -10,6 +10,8 @@ TagManager:
   - Bullet
   - Bullet_Enemy
   - Bucktooth
+  - Collection_Energy
+  - Collection_Gold
   layers:
   - Default
   - TransparentFX

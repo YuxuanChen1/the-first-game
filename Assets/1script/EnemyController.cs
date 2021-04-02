@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    private Transform player;
     private Rigidbody2D rb;
     private Animator anim;
     public GameObject deathPrefab;
+    public GameObject energyPrefab;
+    public GameObject goldPrefab;
 
     private float DistanceToPlayer;
     private float totalTime = 0.5f;
     private bool keepAway = false;
     private float keepAwayTime = 0.5f;
-    public Transform player;
     public float speed = 5f;
-    public float patrolDistance = 25;//巡逻范围
+    public float patrolDistance = 35;//巡逻范围
     public int blood = 5;
 
     void Start()
     {
+        player = GameObject.Find("Player").transform;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
@@ -133,9 +136,7 @@ public class EnemyController : MonoBehaviour
             blood -= hurt;
             if (blood <= 0)
             {
-                //在敌人的位置创建一个死亡的预制体
-                Instantiate(deathPrefab, transform.position, transform.rotation);
-                Destroy(gameObject);
+                Death();
             }
         }
     }
@@ -160,4 +161,35 @@ public class EnemyController : MonoBehaviour
         
     }
     #endregion
+
+    #region 死亡
+    void Death()
+    {
+        //生成掉落物
+        DropGeneration();
+
+        //在敌人的位置创建一个死亡的预制体
+        Instantiate(deathPrefab, transform.position, transform.rotation);
+
+        Destroy(gameObject);
+    }
+
+    void DropGeneration()
+    {
+        if (Random.Range(0f, 10f) <= 5) {
+            float x1 = Random.Range(transform.position.x - 1f, transform.position.x + 1f);
+            float y1 = Random.Range(transform.position.y - 1f, transform.position.y + 1f);
+            Vector3 position = new Vector3(x1, y1, 0f);
+            Instantiate(goldPrefab, position, transform.rotation);
+        }
+        if (Random.Range(0f, 10f) <= 5)
+        {
+            float x1 = Random.Range(transform.position.x - 1f, transform.position.x + 1f);
+            float y1 = Random.Range(transform.position.y - 1f, transform.position.y + 1f);
+            Vector3 position = new Vector3(x1, y1, 0f);
+            Instantiate(energyPrefab, position, transform.rotation);
+        }
+    }
+    #endregion
+
 }

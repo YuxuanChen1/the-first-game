@@ -166,7 +166,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathPrefab: {fileID: 6745906827062812395, guid: 12f86bf2d0bfbc9489765621b6a4b258,
     type: 3}
-  player: {fileID: 0}
+  energyPrefab: {fileID: 9074834124322579366, guid: 74b68c30a32b0b949a06aabe8dd9ff67,
+    type: 3}
+  goldPrefab: {fileID: 5187367614200184122, guid: 33e2b6cc18a593a4884a82e81302fa0b,
+    type: 3}
   speed: 5
   patrolDistance: 25
   blood: 5

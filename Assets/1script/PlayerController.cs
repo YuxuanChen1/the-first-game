@@ -9,14 +9,22 @@ public class PlayerController : MonoBehaviour
     public GameObject weapon;
     private GameObject weapon_skill;
     private float skillTime;
-    private float skillCooltime;
-
-    public float speed;
+    private float skillCooltime = 0f;
     private float faceRight = 1;
-    [SerializeField] private int blood = 5;
-    private int maxArmor = 5;
-    [SerializeField] private int armor = 5;//护甲
-    [SerializeField] private float cooldown = 5f;//护甲回复冷却
+
+    
+    public int blood = 5;
+    public int maxBlood = 5;
+    public int armor = 5;//护甲
+    public int maxArmor = 5;
+    public float cooldown = 5f;//护甲回复冷却
+    public float speed;
+    public float energy = 180f;
+    public int maxEnergy = 180;
+    public int gold = 0;
+    public bool skilling = false;
+    
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -73,20 +81,43 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //受到武器伤害
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //受到武器伤害
+        if (collision.tag == "Bullet_Enemy" || collision.tag == "Bucktooth")
+        {
+            GetHurt(collision);
+        }
+        //拾取物品
+        else if(collision.tag == "Collection_Energy")
+        {
+            if(energy < maxEnergy)
+            {
+                energy += 1;
+            }
+        }
+        else if(collision.tag == "Collection_Gold")
+        {
+            gold += 1;
+        }
+        
+    }
+
+
+    #region 受到武器伤害
+    void GetHurt(Collider2D collision)
+    {
         int hurt = 0;
-        if(collision.transform.tag == "Bullet_Enemy")
+        if (collision.transform.tag == "Bullet_Enemy")
         {
             hurt = collision.transform.GetComponent<Bullet_enemy_1>().hurt;
         }
-        else if(collision.transform.tag == "Bucktooth")
+        else if (collision.transform.tag == "Bucktooth")
         {
             hurt = collision.transform.GetComponent<Bucktooth>().hurt;
         }
 
-        if(hurt != 0)
+        if (hurt != 0)
         {
             cooldown = 5f;
         }
@@ -106,14 +137,16 @@ public class PlayerController : MonoBehaviour
             Death();
         }
     }
+    #endregion
 
-    //死亡
+    #region 死亡
     void Death()
     {
         //
     }
+    #endregion
 
-    //护甲回复
+    #region 护甲回复
     void Recovery()
     {
         cooldown -= Time.deltaTime;
@@ -126,26 +159,32 @@ public class PlayerController : MonoBehaviour
             cooldown = 1f;
         }
     }
+    #endregion
 
+    #region 技能
+    //判断是否使用技能
     void Skill()
     {
         skillTime -= Time.deltaTime;
         skillCooltime -= Time.deltaTime;
         if (Input.GetMouseButtonDown(1) && skillCooltime <= 0)
         {
+            skilling = true;
             UseSkill();
         }
         if (skillTime <= 0 && weapon_skill)
         {
+            skilling = false;
             Destroy(weapon_skill);
             skillCooltime = 30f;
         }
     }
-
+    //使用技能
     void UseSkill()
     {
         skillTime = 5f;
         weapon_skill = Instantiate(weapon, transform.position, transform.rotation,transform);
         weapon_skill.GetComponent<SpriteRenderer>().sortingOrder = 0;
     }
+    #endregion
 }

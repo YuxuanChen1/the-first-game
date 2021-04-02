@@ -6,17 +6,31 @@ public class Weapon : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject bulletPrefab;
+    public int energyComsumption = 1;
 
     private Vector3 mousePosition;
+    private GameObject player;
 
 
     void Update()
     {
+        player = GameObject.Find("Player");
         RotateWeaponForPlayer();
         //开枪
         if (Input.GetMouseButtonDown(0))
         {
-            Shoot();
+            if(player.GetComponent<PlayerController>().energy >= energyComsumption)
+            {
+                Shoot();
+                if(player.GetComponent<PlayerController>().skilling == true)
+                {
+                    player.GetComponent<PlayerController>().energy -= 0.5f * energyComsumption;
+                }
+                else
+                {
+                    player.GetComponent<PlayerController>().energy -= energyComsumption;
+                }
+            }
         }
     }
 
