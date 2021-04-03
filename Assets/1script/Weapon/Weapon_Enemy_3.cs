@@ -8,7 +8,7 @@ public class Weapon_Enemy_3 : MonoBehaviour
     public Transform hand;
     public GameObject bulletPrefab;
     private Transform player;
-    public float fireDistance = 50f;
+    public float fireDistance = 100f;
 
     private float totalTime = 5f;
 
@@ -34,7 +34,7 @@ public class Weapon_Enemy_3 : MonoBehaviour
                 {
                     Shoot();
                     //todo:计时结束
-                    totalTime = 1f;
+                    totalTime = 3f;
                 }
             }
         }

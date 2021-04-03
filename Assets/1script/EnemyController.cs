@@ -15,12 +15,14 @@ public class EnemyController : MonoBehaviour
     private float totalTime = 0.5f;
     private bool keepAway = false;
     private float keepAwayTime = 0.5f;
-    public float speed = 5f;
+    public float ratedSpeed = 5f;
+    public float speed = 0f;
     public float patrolDistance = 35;//巡逻范围
     public int blood = 5;
 
     void Start()
     {
+        speed = 0f;
         player = GameObject.Find("Player").transform;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -126,10 +128,11 @@ public class EnemyController : MonoBehaviour
     }
     #endregion
 
-    #region 受到伤害
+    #region Trigger
+    //武器伤害
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //武器伤害
+        
         if (collision.tag == "Bullet")
         {
             int hurt = collision.transform.GetComponent<Bullet>().hurt;
@@ -140,6 +143,17 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
+    ////是否战斗
+    //private void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("MapController"))
+    //    {
+    //        if (collision.GetComponent<MapController>().fighting)
+    //        {
+    //            speed = 5f;
+    //        }
+    //    }
+    //}
     #endregion
 
     #region 远离玩家

@@ -1,18 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator anim;
-    public GameObject weapon;
     private GameObject weapon_skill;
+    public GameObject weapon;
+    public GameObject deathPrefab;
+
     private float skillTime;
     private float skillCooltime = 0f;
     private float faceRight = 1;
-
-    
+    private bool death = false;
     public int blood = 5;
     public int maxBlood = 5;
     public int armor = 5;//护甲
@@ -41,6 +43,11 @@ public class PlayerController : MonoBehaviour
 
     void Movement()
     {
+        if (death)
+        {
+            return;
+        }
+
         float horizontalMove = Input.GetAxis("Horizontal");
         float verticalMove = Input.GetAxis("Vertical");
 
@@ -91,9 +98,9 @@ public class PlayerController : MonoBehaviour
         //拾取物品
         else if(collision.tag == "Collection_Energy")
         {
-            if(energy < maxEnergy)
+            if(energy < maxEnergy-7)
             {
-                energy += 1;
+                energy += 8;
             }
         }
         else if(collision.tag == "Collection_Gold")
@@ -131,8 +138,9 @@ public class PlayerController : MonoBehaviour
             blood -= hurt - armor;
             armor = 0;
         }
-        if (blood <= 0)
+        if (blood <= 0 && !death)
         {
+            death = true;
             blood = 0;
             Death();
         }
@@ -142,7 +150,10 @@ public class PlayerController : MonoBehaviour
     #region 死亡
     void Death()
     {
-        //
+        Instantiate(deathPrefab, transform.position, transform.rotation);
+        Invoke("OpenDeathMenu", 2f);
+        gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "DeathPlayer";
+        gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
     }
     #endregion
 
@@ -187,4 +198,10 @@ public class PlayerController : MonoBehaviour
         weapon_skill.GetComponent<SpriteRenderer>().sortingOrder = 0;
     }
     #endregion
+
+    //跳转到死亡菜单
+    void OpenDeathMenu()
+    {
+        SceneManager.LoadScene("DeathMenu");
+    }
 }

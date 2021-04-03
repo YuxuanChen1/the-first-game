@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Weapon_Enemy_1 : MonoBehaviour
 {
-    public Transform[] firePoint;
+    public Transform firePoint;
     public GameObject bulletPrefab;
     private Transform player;
-    public float fireDistance;
+    public float fireDistance = 70f;
 
-    private float totalTime = 1f;
+    private float totalTime = 2f;
 
     void Start()
     {
@@ -32,8 +32,9 @@ public class Weapon_Enemy_1 : MonoBehaviour
                 if (totalTime <= 0)
                 {
                     Shoot();
+                    Invoke("Shoot", 0.5f);
                     //todo:计时结束
-                    totalTime = 1f;
+                    totalTime = 2f;
                 }
             }
         }
@@ -43,8 +44,7 @@ public class Weapon_Enemy_1 : MonoBehaviour
     void Shoot()
     {
         //生成子弹
-        Instantiate(bulletPrefab, firePoint[0].position, firePoint[0].rotation);
-        Instantiate(bulletPrefab, firePoint[1].position, firePoint[1].rotation);
+        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
     }
 
     //旋转武器

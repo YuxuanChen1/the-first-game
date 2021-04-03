@@ -12,6 +12,9 @@ TagManager:
   - Bucktooth
   - Collection_Energy
   - Collection_Gold
+  - Door
+  - MapController
+  - TreasureBox
   layers:
   - Default
   - TransparentFX
@@ -49,15 +52,30 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: DeathPlayer
+    uniqueID: 4023999637
+    locked: 0
   - name: Background
     uniqueID: 2901753229
     locked: 0
+  - name: Door
+    uniqueID: 2795365545
+    locked: 0
   - name: Wall
     uniqueID: 274318335
+    locked: 0
+  - name: TreasureBox
+    uniqueID: 907342885
     locked: 0
   - name: Destory
     uniqueID: 3563119753
     locked: 0
   - name: Player
     uniqueID: 3319805649
+    locked: 0
+  - name: Door_Frontground
+    uniqueID: 3855419389
+    locked: 0
+  - name: Frontground
+    uniqueID: 3010360373
     locked: 0
