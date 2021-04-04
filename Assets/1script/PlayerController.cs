@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public GameObject weapon;
     public GameObject deathPrefab;
 
+    private PlayerData playerData;
+
     private float skillTime;
     private float skillCooltime = 0f;
     private float faceRight = 1;
@@ -29,6 +31,13 @@ public class PlayerController : MonoBehaviour
     
     void Start()
     {
+        playerData = GameObject.Find("PlayerData").GetComponent<PlayerData>();
+        blood = playerData.blood;
+        armor = playerData.armor;
+        energy = playerData.energy;
+        gold = playerData.gold;
+
+
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
@@ -39,6 +48,12 @@ public class PlayerController : MonoBehaviour
         AnimSwicth();
         Recovery();
         Skill();
+        if (blood <= 0 && !death)
+        {
+            death = true;
+            blood = 0;
+            Death();
+        }
     }
 
     void Movement()
@@ -102,6 +117,10 @@ public class PlayerController : MonoBehaviour
             {
                 energy += 8;
             }
+            else
+            {
+                energy = maxEnergy;
+            }
         }
         else if(collision.tag == "Collection_Gold")
         {
@@ -137,12 +156,6 @@ public class PlayerController : MonoBehaviour
         {
             blood -= hurt - armor;
             armor = 0;
-        }
-        if (blood <= 0 && !death)
-        {
-            death = true;
-            blood = 0;
-            Death();
         }
     }
     #endregion

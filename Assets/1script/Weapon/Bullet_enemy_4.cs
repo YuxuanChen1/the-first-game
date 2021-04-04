@@ -2,29 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet_enemy_1 : MonoBehaviour
+public class Bullet_enemy_4 : MonoBehaviour
 {
-    public float speed = 20f;
-    public int hurt = 2;
-    public float totalTime;
+    public float fastSpeed = 2f;
+    public float slowSpeed = 0.5f;
+    public float fastTime = 1f;
+    public float slowTime = 2f;
+    public int hurt = 4;
     public Rigidbody2D rb;
     private Animator anim;
     void Start()
     {
-        rb.velocity = transform.right * speed;
+        rb.velocity = transform.right * fastSpeed;
         anim = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        totalTime -= Time.deltaTime;
-        if (totalTime <= 0f)
+        if (fastSpeed > 0f)
+        {
+            fastSpeed -= Time.deltaTime;
+        }
+        else if(fastTime <= 0f && slowTime > 0f)
+        {
+            slowSpeed -= Time.deltaTime;
+            rb.velocity = transform.right * slowSpeed;
+        }
+        else
         {
             rb.velocity = new Vector2(0, 0);
             anim.SetBool("boom", true);
         }
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //与collision发生接触（Wall  Enemy   Destroy）
@@ -47,7 +56,7 @@ public class Bullet_enemy_1 : MonoBehaviour
         }
     }
 
-    //销毁子弹 动画结束后调用
+    //销毁子弹
     void Delete()
     {
         Destroy(gameObject);

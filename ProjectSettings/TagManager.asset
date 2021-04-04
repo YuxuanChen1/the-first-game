@@ -15,6 +15,7 @@ TagManager:
   - Door
   - MapController
   - TreasureBox
+  - PlayerData
   layers:
   - Default
   - TransparentFX
@@ -63,6 +64,12 @@ TagManager:
     locked: 0
   - name: Wall
     uniqueID: 274318335
+    locked: 0
+  - name: Spikeweed_Background
+    uniqueID: 3194778293
+    locked: 0
+  - name: Spikeweed
+    uniqueID: 2216451951
     locked: 0
   - name: TreasureBox
     uniqueID: 907342885

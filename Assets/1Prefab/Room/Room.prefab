@@ -138,10 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: 0
   enemy: 1
-  enemys:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  enemys: []
   fighting: 0
   treasureBox: {fileID: 8811748807394514314, guid: b4856de69b1d18348b5417eab5d7030b,
     type: 3}
