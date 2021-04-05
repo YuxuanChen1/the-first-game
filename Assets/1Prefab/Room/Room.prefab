@@ -512,7 +512,22 @@ PrefabInstance:
     - target: {fileID: 1470832902954896893, guid: 216b2cd0907c87b4391ec4eda2b8fb43,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470832903092891765, guid: 216b2cd0907c87b4391ec4eda2b8fb43,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470832903278385060, guid: 216b2cd0907c87b4391ec4eda2b8fb43,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470832903435646086, guid: 216b2cd0907c87b4391ec4eda2b8fb43,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1470832904600312342, guid: 216b2cd0907c87b4391ec4eda2b8fb43,
         type: 3}
@@ -579,6 +594,11 @@ PrefabInstance:
       propertyPath: mapController
       value: 
       objectReference: {fileID: 7524542686450789923}
+    - target: {fileID: 1470832904672539511, guid: 216b2cd0907c87b4391ec4eda2b8fb43,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 216b2cd0907c87b4391ec4eda2b8fb43, type: 3}
 --- !u!4 &7524542685408558182 stripped
