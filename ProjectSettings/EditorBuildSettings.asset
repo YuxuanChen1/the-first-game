@@ -15,6 +15,13 @@ EditorBuildSettings:
     path: Assets/1Scenes/GameLevel_2.unity
     guid: 23d2fd9d2e410984ba35f8b9e3c1a056
   - enabled: 1
+    path: Assets/1Scenes/WinMenu.unity
+<<<<<<< HEAD
+    guid: 64d8383a974d90a4db3f3ff89bf8e0dc
+=======
+    guid: 6553c0f602253f24cb2b32f1bf6fc79d
+>>>>>>> 59b387f2fd5d9742e1254fada2546ec36a7dc9ee
+  - enabled: 1
     path: Assets/1Scenes/DeathMenu.unity
     guid: ffbb737786dcbec4781a9781608151be
   m_configObjects: {}
